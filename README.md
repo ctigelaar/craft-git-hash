@@ -1,2 +1,2 @@
-# craft-git-hash
-Output git commit hash
+# smtools
+Collection of common used Craft tools
