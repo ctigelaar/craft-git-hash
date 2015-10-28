@@ -1,0 +1,14 @@
+{
+    "name": "ctigelaar/smtools",
+    "description": "Common used Craft tools",
+    "authors": [
+        {
+            "name": "Christiaan Tigelaar",
+            "email": "christiaan@sitemind.nl"
+        }
+    ],
+    "type": "craft-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
