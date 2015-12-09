@@ -10,7 +10,7 @@ class SmToolsPlugin extends BasePlugin
 
     public function getVersion()
     {
-        return '1.0.0';
+        return '1.0.2';
     }
 
     public function getDeveloper()
