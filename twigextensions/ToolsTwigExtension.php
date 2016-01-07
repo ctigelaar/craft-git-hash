@@ -20,8 +20,46 @@ class ToolsTwigExtension extends \Twig_Extension
             'get_class' => new Twig_Filter_Function('get_class'),
             'method_exists' => new Twig_Filter_Function('method_exists'),
             'print_r' => new Twig_Filter_Method($this, 'print_r'),
-            'email_encode' => new Twig_Filter_Method($this, 'emailEncode')
+            'email_encode' => new Twig_Filter_Method($this, 'emailEncode'),
+            'natural_join' => new Twig_Filter_Method($this, 'naturalJoin')
         );
+    }
+
+
+    /**
+     * The MIT License (MIT) Copyright (c) 2014 Colin Viebrock
+     *
+     * @see https://github.com/cviebrock/twig-natural-join
+     */
+    public function naturalJoin($array, $seperator, $final_seperator, $oxford = false)
+    {
+        if ($array instanceof Traversable) {
+            $array = iterator_to_array($array, false);
+        }
+
+        // one element? just return it
+        if (count($array) == 1) {
+            return reset($array);
+        }
+
+        // two elements? only use the final_seperator
+        if (count($array) == 2) {
+            return implode($final_seperator, $array);
+        }
+
+        // more than 2 elements, so strip off the last one
+        // and join the rest using the normal seperator
+        $last = array_pop($array);
+        $first = implode($seperator, $array);
+
+        // return the list
+        // (if using the "oxford" method, add another seperator before the
+        // final seperator
+
+        return $first .
+            ($oxford ? $seperator : '') .
+            $final_seperator .
+            $last;
     }
 
     /**
