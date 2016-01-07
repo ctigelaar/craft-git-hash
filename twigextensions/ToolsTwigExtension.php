@@ -31,35 +31,36 @@ class ToolsTwigExtension extends \Twig_Extension
      *
      * @see https://github.com/cviebrock/twig-natural-join
      */
-    public function naturalJoin($array, $seperator, $final_seperator, $oxford = false)
+    public function naturalJoin($value, $seperator = '', $final_seperator = '', $oxford = false)
     {
-        if ($array instanceof Traversable) {
-            $array = iterator_to_array($array, false);
+        if ($value instanceof \Traversable)
+        {
+            $value = iterator_to_array($value, false);
+        }
+        else
+        {
+            $value = array_merge($value);
         }
 
         // one element? just return it
-        if (count($array) == 1) {
-            return reset($array);
+        if (count($value) == 1)
+        {
+            return reset($value);
         }
 
         // two elements? only use the final_seperator
-        if (count($array) == 2) {
-            return implode($final_seperator, $array);
+        if (count($value) == 2)
+        {
+            return implode($final_seperator, $value);
         }
 
         // more than 2 elements, so strip off the last one
         // and join the rest using the normal seperator
-        $last = array_pop($array);
-        $first = implode($seperator, $array);
+        $last = array_pop($value);
+        $first = implode($seperator, $value);
 
         // return the list
-        // (if using the "oxford" method, add another seperator before the
-        // final seperator
-
-        return $first .
-            ($oxford ? $seperator : '') .
-            $final_seperator .
-            $last;
+        return $first . ($oxford ? $seperator : '') . $final_seperator . $last;
     }
 
     /**
