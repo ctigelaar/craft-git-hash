@@ -223,6 +223,7 @@ class ToolsTwigExtension extends \Twig_Extension
             'second' => Craft::t('second'),
             'seconds' => Craft::t('seconds'),
             'ago' => Craft::t('ago'),
+            'timeType' => ''
         );
 
         if ($dayDiff == 0)
